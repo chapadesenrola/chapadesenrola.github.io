@@ -318,8 +318,10 @@ details p.note,details .note{margin-left:0}
 
 <section class="tab" id="tab-reclame" aria-label="Reclame Aqui">
   <div class="eyebrow">para falar</div><h2 style="margin-top:6px">Reclame Aqui</h2>
-  <p class="lead">Um canal direto entre nós do centro e os alunos da Psico.</p>
+  <p class="lead">O Reclame Aqui é público. Ele serve para reclamações e dúvidas.</p>
   <div class="drive"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1.1-4.6A8 8 0 1 1 21 12z"/></svg><div style="min-width:0"><b>Pelo Spotted exclusivo da Psico Mack</b><span id="spstat"></span></div><span id="spbtn" style="margin-left:auto;flex:none"></span></div>
+  <p class="note" style="margin:12px 0 0"><b>Assunto delicado?</b> Para assédio, vulnerabilidade e saúde mental, fale com um de nós ou use o formulário de acolhimento, que é sigiloso.</p>
+  <div class="drive"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><div style="min-width:0"><b>Formulário de acolhimento</b><span id="fmstat"></span></div><span id="fmbtn" style="margin-left:auto;flex:none"></span></div>
   <h3 style="font:400 20px var(--display);margin:22px 0 10px">Pode mandar</h3>
   <div class="stack cards3">
     <div class="ev"><div style="min-width:0"><h3>Não sabe com quem da diretoria falar?</h3><p class="meta">Manda no reclame que a gente encaminha.</p></div></div>
@@ -655,6 +657,10 @@ const SPOTTED_URL='';/* cole aqui o link do Spotted da chapa */
 const spEl=(cls,label)=>SPOTTED_URL?`<a class="${cls}" href="${SPOTTED_URL}" target="_blank" rel="noopener">${label}</a>`:`<button class="${cls}" data-spot>${label}</button>`;
 $('#spstat').textContent=SPOTTED_URL?'Anônimo, direto com a diretoria':'Spotted em breve';
 $('#spbtn').innerHTML=spEl('btn','Abrir Spotted');
+const FORMS_URL='';/* cole aqui o link do formulário de acolhimento (Google Forms) */
+$('#fmstat').textContent='Sigiloso';
+$('#fmbtn').innerHTML=FORMS_URL?`<a class="btn" href="${FORMS_URL}" target="_blank" rel="noopener">Abrir formulário</a>`:'<button class="btn" data-form>Abrir formulário</button>';
+document.addEventListener('click',e=>{if(e.target.closest('[data-form]'))toast('O formulário de acolhimento sigiloso será adicionado em breve.')});
 document.addEventListener('click',e=>{if(e.target.closest('[data-spot]'))toast('O Spotted exclusivo da Psico Mack ainda está sendo criado. Em breve aqui.')});
 const RC=['Reclamação','Dúvida','Acessibilidade','Professor ou aula','Outro'];let rc=RC[0];
 function drawRc(){$('#rctype').innerHTML=RC.map(x=>`<button class="chip" data-x="${esc(x)}" aria-pressed="${x===rc}">${esc(x)}</button>`).join('')}
